@@ -22,7 +22,7 @@ important notes:
 -Gate time is in use, so in order to close the node, velocity value zero must be send to the same note number. (Just like the MIDI convention)
 -If you change presets on the run, newly opened notes with new presets might affect the existing notes. Most of the time this is a very minimal effect because it only affects the global LFO value. This happens due to the architecture design of DX7. Remember this is a single clone of DX7, not a clones of clones.
 -Not all presets have velocity depth. So it might sound same no matter what the velocity is.
--Sometimes you see "FAILURE IN SERVER /n_free Node 808 not found" message, this is due to the DetectSilence.ar UGen which helps me to close some forgotten notes. You can comment it out. Nothing to be frightened of.
+-Sometimes you see "FAILURE IN SERVER /n_free Node 808 not found" message, this is due to the DetectSilence.ar UGen which helps me to close some forgotten notes in combination with FreeSelfWhenDone (Sometimes nodes skips detect silence because of DC component). FreeSelfDone commmand has a 10 second duration. So if you need longer duration please increase the argument but don't comment out completely.
 -You can ignore all the commented out areas. It is mostly for debug use. Everything works perfectly. Nothing to worry about.
 
 //order of things: [note, velocity, preset]
@@ -307,7 +307,7 @@ SynthDef(\DX7, {
 	//below is the general,
 	osc_sync, transpose,
 	gate1=1, gate1Rel = 1, amp=0.1, totVol;
-	var ctls, mods, chans, out,
+	var ctls, mods, chans, out, kilnod,
 	envAmp1, envEnv1, envAmp2, envEnv2, envAmp3, envEnv3 ,envAmp4, envEnv4, envAmp5, envEnv5, envAmp6, envEnv6, dca, envAmpP, envEnvP;
 	//
 	envEnvP = Env.new([ envPL0, envPL1, envPL2, envPL3, envPL4], [envPR0,envPR1,envPR2,envPR3], 0, 3);
@@ -351,11 +351,12 @@ SynthDef(\DX7, {
 		(out[4] * 1 * dn40),
 		(out[5] * 1 * dn41),
 	]);
-	//FreeSelfWhenDone.kr(Line.kr(0, 1, 11));
-	DetectSilence.ar(out,0.001, doneAction:2);
+	FreeSelfWhenDone.kr(Line.kr(0, 1, 10));
+	kilnod = DetectSilence.ar(out, 0.01, 0.2, doneAction:2);
 	//out = out * Lag2.ar(In.ar(busMe),0.01);
 	//Out.ar([0,1], 0.5 * In.ar(busMe)); //deneme
 	out = out / outMult;
+	DetectSilence.ar(out, 0.01, 0.2,doneAction:2);
 	//out = out * ((totVol -15).dbamp);
 	Out.ar(outBus, out.dup); //orj
 
@@ -678,14 +679,14 @@ Things to be implemented in future:
 
 
 //Some fun example below. Uncomment this area and run the below parenthesis for random preset and pitch for each note. Check CPU!!
-
+*/
 (
-~number = 8000; //preset start number, dont go further than 16383
+~number = 15000.rand; //preset start number, dont go further than 16383
 ~ra = Routine {
 	303.do({ arg a;
-		~sun = 90.rand + 18;
-		~mainCaller.value(~sun, 127, ~number);
-		0.125.wait; // Waits for quarter second between each number
+		~sun = 99.rand + 10;
+		~mainCaller.value(~sun, 127.rand, ~number);
+		((50.rand)/100).wait; // Waits for at most half second between each node
 		~mainCaller.value(~sun, 0, ~number);
 		~number = ~number +1;
 	});
@@ -698,4 +699,5 @@ Things to be implemented in future:
 ~ra.stop;
 ~mainCaller.value(~sun, 0, ~number);
 )
+
 */
