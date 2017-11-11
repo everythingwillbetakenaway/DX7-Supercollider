@@ -679,7 +679,7 @@ Things to be implemented in future:
 
 
 //Some fun example below. Uncomment this area and run the below parenthesis for random preset and pitch for each note. Check CPU!!
-*/
+
 (
 ~number = 15000.rand; //preset start number, dont go further than 16383
 ~ra = Routine {
