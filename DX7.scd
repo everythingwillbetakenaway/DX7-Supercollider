@@ -352,7 +352,7 @@ SynthDef(\DX7, {
 		(out[5] * 1 * dn41),
 	]);
 	//FreeSelfWhenDone.kr(Line.kr(0, 1, 11));
-	DetectSilence.ar(out, doneAction:2);
+	DetectSilence.ar(out,0.001, doneAction:2);
 	//out = out * Lag2.ar(In.ar(busMe),0.01);
 	//Out.ar([0,1], 0.5 * In.ar(busMe)); //deneme
 	out = out / outMult;
@@ -685,7 +685,7 @@ Things to be implemented in future:
 	303.do({ arg a;
 		~sun = 90.rand + 18;
 		~mainCaller.value(~sun, 127, ~number);
-		0.25.wait; // Waits for quarter second between each number
+		0.125.wait; // Waits for quarter second between each number
 		~mainCaller.value(~sun, 0, ~number);
 		~number = ~number +1;
 	});
