@@ -675,7 +675,7 @@ Things to be implemented in future:
 -Adding your own DX7 preset option will be implemented.
 -Add some examples of original DX7 sounds compared with this Synthdef in order to show accuracy. (During my initial tests it was hard to determine which one is which with the blind tests)
 -That's all folks, for questions just drop a mail to egegonul@egegonul.com
-*/
+
 
 //Some fun example below. Uncomment this area and run the below parenthesis for random preset and pitch for each note. Check CPU!!
 
