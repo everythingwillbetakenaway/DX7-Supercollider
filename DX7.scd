@@ -620,7 +620,7 @@ noteParser = { arg vel, note;
 						if(betass == 0,   {
 							betass = 1;headno = Synth.before(novaDX7 ,\InfEfx, defjamHead.value(0)).onFree{/*betass = 0*/}},
 						{
-							headno.setControls(defjamHead.value(0))});
+							headno.set(defjamHead.value(0))});
 					});
 					noteArrayDX7[note] = Synth(\DX7 ,defme.value(note, vel),novaDX7);
 					//noteArrayDX7[note] = Synth(\DX7 ,defme.value(note, vel), novaDX7); //orjburayi addtotail diye degistirdin
