@@ -356,7 +356,7 @@ SynthDef(\DX7, {
 	//out = out * Lag2.ar(In.ar(busMe),0.01);
 	//Out.ar([0,1], 0.5 * In.ar(busMe)); //deneme
 	out = out / outMult;
-	DetectSilence.ar(out, 0.01, 0.2,doneAction:2);
+	//DetectSilence.ar(out, 0.01, 0.2,doneAction:2);
 	//out = out * ((totVol -15).dbamp);
 	Out.ar(outBus, out.dup); //orj
 
