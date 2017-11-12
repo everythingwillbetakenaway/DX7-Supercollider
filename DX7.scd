@@ -206,13 +206,14 @@ feedbackSel = #[
 	35, 7, 35, 33, 35, 34, 35, 21,
 	7, 14, 35,  7, 35, 35,  7, 35,
 	7, 14, 35, 14, 14, 35, 35, 35,
-	35,35, 14, 28, 35, 28, 35, 35
+	35, 35, 14, 28, 35, 28, 35, 35
 ],
 
-feedbackIndex = [0, 0.0066, 0.0077, 0.011, 0.0153, 0.018, 0.0226, 0.063],
+feedbackIndex = #[0, 0.0066, 0.0077, 0.011, 0.0153, 0.018, 0.0226, 0.063],
 
 waveform_selector, phase_selector,
-wf = Array2D.fromArray(32, 42, [ //algorithm matrix
+wf = Array2D.fromArray(32, 42, [
+	//algorithm matrix
 	/*Alg #1*/ /*1*/0,(pi * 4),0,0,0,0,/*2*/0,0,0,0,0,0,/*3*/0,0,0,(pi * 4),0,0,/*4*/0,0,0,0,(pi * 4),0,/*5*/0,0,0,0,0,(pi * 4),/*6*/0,0,0,0,0,(pi * 4),/*V*/1,0,1,0,0,0,
 	/*Alg #2*/ /*1*/0,(pi * 4),0,0,0,0,/*2*/0,(pi * 4),0,0,0,0,/*3*/0,0,0,(pi * 4),0,0,/*4*/0,0,0,0,(pi * 4),0,/*5*/0,0,0,0,0,(pi * 4),/*6*/0,0,0,0,0,0,/*V*/1,0,1,0,0,0,
 	/*Alg #3*/ /*1*/0,(pi * 4),0,0,0,0,/*2*/0,0,(pi * 4),0,0,0,/*3*/0,0,0,0,0,0,/*4*/0,0,0,0,(pi * 4),0,/*5*/0,0,0,0,0,(pi * 4),/*6*/0,0,0,0,0,(pi * 4),/*V*/1,0,0,1,0,0,
@@ -259,7 +260,7 @@ cirklonCCparse = #[
 	[4,53],[3,5],[3,119],[3,17],[3,77],[3,29],[3,35],[3,41],[3,47],[3,53],[3,59],[3,65],[3,71],[3,11],[3,95],[3,107],[3,89],[3,101],[3,83],[3,113],[3,23],
 ],
 
-outOscVol = [2, 2, 2, 2, 3, 3, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 3, 3, 4, 4, 4, 5, 5, 3, 3, 3, 4, 4, 5, 6],
+outOscVol = #[2, 2, 2, 2, 3, 3, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 3, 3, 4, 4, 4, 5, 5, 3, 3, 3, 4, 4, 5, 6],
 
 /*
 buffers and busses
@@ -303,8 +304,9 @@ SynthDef(\InfEfx, {
 	FreeSelf.kr(gate);
 	lfo = Osc.ar(lfo_wave,lfo_speed, lfo_phase, 0.5 * lfoGet2, 0.5 * lfoGet2) + LFNoise0.ar(lfo_speed, 0.5 * lfoGet1, 0.5 * lfoGet1);
 	lfo = lfo * EnvGen.ar(Env.asr(lfo_delay,releaseTime:0.01, curve: -5),envTrig);
-	multiPitch = LinLin.ar(lfo,0, 1, (((-1) * pitchCons).midiratio * tameM) + tameC, pitchCons.midiratio);
-	lfoAmp = LinLin.ar(lfo,0,1, (lfo_amd * (-3/4)),0);
+	multiPitch = LinLin.ar(lfo, 0, 1, (pitchCons.neg.midiratio * tameM) + tameC, pitchCons.midiratio);
+	lfoAmp = LinLin.ar(lfo, 0, 1, lfo_amd * (-3/4), 0);
+
 	//Poll.ar(Impulse.ar(10), lfoAmp);
 	//PHASE PART++
 	//tri en tepeden basliyor
@@ -313,6 +315,7 @@ SynthDef(\InfEfx, {
 	//sawup en yukardan
 	//square en asaidan
 	//sine sifirdan baslio
+
 	Out.ar(busMePitch, multiPitch);
 	Out.ar(busMeAmp, lfoAmp)
 }).add;
@@ -378,7 +381,7 @@ SynthDef(\DX7, {
 	chans = [0, 1, 2, 3, 4, 5];
 	out = FM7.ar(ctls, mods).slice(chans) * -12.dbamp;
 	out = Mix.new([
-		(out[0] * 1*  dn36),
+		(out[0] * 1 * dn36),
 		(out[1] * 1 * dn37),
 		(out[2] * 1 * dn38),
 		(out[3] * 1 * dn39),
@@ -604,31 +607,31 @@ defme = { arg a1,b1;
 				bloke = 0;
 		});
 		a = a ++ [
-			\coars ++ (c + 1).asString, trCoarse,
-			\fine_ ++ (c + 1).asString, trFine,
-			\detun ++ (c + 1).asString, trDetune,
-			\noteBlok ++ (c + 1).asString, bloke,
+			\coars ++ (c + 1), trCoarse,
+			\fine_ ++ (c + 1), trFine,
+			\detun ++ (c + 1), trDetune,
+			\noteBlok ++ (c + 1), bloke,
 		];
 
 	};
 	6.do { arg k;
 		a = a ++ [
-			\coars ++ (k + 1).asString, coarseArrR[vr[0 + k]],
-			\fine_ ++ (k + 1).asString, fineArrR[vr[114 + k]],
-			\env ++ (k + 1).asString ++ "L0", envL[k,0],
-			\env ++ (k + 1).asString ++ "L1", envL[k,1],
-			\env ++ (k + 1).asString ++ "L2", envL[k,2],
-			\env ++ (k + 1).asString ++ "L3", envL[k,3],
-			\env ++ (k + 1).asString ++ "L4", envL[k,4],
-			\env ++ (k + 1).asString ++ "R0", envR[k,0],
-			\env ++ (k + 1).asString ++ "R1", envR[k,1],
-			\env ++ (k + 1).asString ++ "R2", envR[k,2],
-			\env ++ (k + 1).asString ++ "R3", envR[k,3],
-			\env ++ (k + 1).asString ++ "C0", envC[k,0],
-			\env ++ (k + 1).asString ++ "C1", envC[k,1],
-			\env ++ (k + 1).asString ++ "C2", envC[k,2],
-			\env ++ (k + 1).asString ++ "C3", envC[k,3],
-			\modSens ++ (k + 1).asString, vr[18 + k],
+			\coars ++ (k + 1), coarseArrR[vr[0 + k]],
+			\fine_ ++ (k + 1), fineArrR[vr[114 + k]],
+			\env ++ (k + 1) ++ "L0", envL[k,0],
+			\env ++ (k + 1) ++ "L1", envL[k,1],
+			\env ++ (k + 1) ++ "L2", envL[k,2],
+			\env ++ (k + 1) ++ "L3", envL[k,3],
+			\env ++ (k + 1) ++ "L4", envL[k,4],
+			\env ++ (k + 1) ++ "R0", envR[k,0],
+			\env ++ (k + 1) ++ "R1", envR[k,1],
+			\env ++ (k + 1) ++ "R2", envR[k,2],
+			\env ++ (k + 1) ++ "R3", envR[k,3],
+			\env ++ (k + 1) ++ "C0", envC[k,0],
+			\env ++ (k + 1) ++ "C1", envC[k,1],
+			\env ++ (k + 1) ++ "C2", envC[k,2],
+			\env ++ (k + 1) ++ "C3", envC[k,3],
+			\modSens ++ (k + 1), vr[18 + k],
 		];
 
 	};
@@ -677,9 +680,9 @@ noteParser = { arg vel, note;
 
 f = { arg x, y ,z; //y value, z cc no
 	if(x == 3,
-		{vr[y] = z},
-		{vr[y + 128] = z}
-	);
+		{ vr[y] = z },
+		{ vr[y + 128] = z }
+	)
 };
 
 ~mainCaller = { arg x, y, z;
@@ -696,12 +699,8 @@ f = { arg x, y ,z; //y value, z cc no
 			//~midiOutDX7.control(~cirklonCCparse[item][0],~cirklonCCparse[item][1],k);
 
 		});
-
-
-		noteParser.value(y, x)},
-	{
-		noteParser.value(y, x);
 	});
+	noteParser.value(y, x)
 
 };
 )
