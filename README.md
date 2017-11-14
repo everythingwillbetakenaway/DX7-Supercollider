@@ -1,6 +1,6 @@
 # DX7-Supercollider
 
-My accurate Yamaha DX-7 clone. Programmed in Supercollider.
+###My accurate Yamaha DX-7 clone. Programmed in Supercollider.
 
 This is a super-exact clone of DX7 in SC environment. This project started with my internship at the STEIM during last year,, I was able to get my hands on an original DX7 synth and eventually found out that this instrument has this mystic / marvelous sound. So I started fiddling with it and made some experiments with Supercollider. After a while, it became an obsession to play with it and started to copy parts of its synth mechanism just to flex my DSP muscles. Sooner, I found myself in this huge project to clone the entire thing. After 2-3 months of implementing process and lots of sleepless nights. I was able to clone the entire DX7 engine with very high accurate results. Other than the DX7’s vintage sound hiss, it is hard to distinguish between the clone and the original one on the same presets. For my own use, I collected some 16384 (2^14) DX7 sysex bank presets from the internet and converted it to some integer sequences to read it from Supercollider. I am also combining this clone with this 16384 preset package. Currently, I am using it with my sequencers to modulate its parameters but for everyone's ease of use, I implemented a very basic function call. Which calls notes with this format: [Midi note, velocity, preset number]. Additional documentation is in the file. It is very easy to run but one requirement is to put my own collected DX7 presets files in the same directory as the DX7.scd patch and the other requirement is to have SC3plugins because I implemented it with FM7.ar Ugen. For the current version, it is not possible to put your own DX7 patches or modulate its parameters (I will add them in the future). But I think this synth has enough interesting presets and sounds to find some use in the different projects. You can download the zip of DX7.scd and preset file from this link: egegonul.com/dx7.zip I also added it to sccode.org. Have fun!
 
@@ -12,20 +12,37 @@ You don't need to open the DX7.afx file. It just needs to be in the same directo
 
 The only requirement is to install the SC3-Plugins Ugen library because I use the FM7.ar Ugen at the heart of all operation.
 
-```
 [SC3-Plugins](https://github.com/supercollider/sc3-plugins)
-```
 
 ### Sound Examples
 
 Here are some sound examples which calls a random preset for each new node:
 
-```
 [Example 1](https://soundcloud.com/ewbta/dx-7-sc-clone-demo-2)
 [Example 2](https://soundcloud.com/ewbta/dx7-clone-sounds)
-```
 
 You can try this kind of example by running the code at the very end of DX7.scd file.
+
+
+### Basic MIDI implementation
+
+It’s a very straightforward process; the preset number selection can be made by two different MIDI CCs. 128 * 128 = 16384 number is needed, which makes you able to choose the entire library of presets (2 ^ 14). 
+Code format example: 
+
+```
+MIDIdef.noteOn(\DX7, {arg vel, note;
+	~mainCaller.value(note, vel, ~cc1 * ~cc2);
+},srcID:~midiInINST4,chan:14).add;
+
+MIDIdef.cc(\DX7CC, {arg ...args;
+	~cc1 = args[0];
+	~cc2 = args[1];
+},(0..1),srcID:~midiInINST,chan:0).add;
+
+MIDIdef.noteOff(\DX7off, {arg vel, note;
+	~mainCaller.value(note, 0);
+},srcID:~midiInINST,chan:0).add;
+```
 
 
 ## Author
