@@ -48,7 +48,7 @@ MIDIdef.noteOff(\DX7off, {arg vel, note;
 
 ## Author
 
-* **Aziz Ege Gonul** - [My Personal Website](www.egegonul.com)
+* **Aziz Ege Gonul** - [My Personal Website](http://www.egegonul.com)
 
 ## Things to be implemented
 
