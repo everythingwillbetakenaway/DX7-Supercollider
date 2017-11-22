@@ -198,6 +198,7 @@ if (adepth + mdepth + edepth > 127.5f)
 edepth = 127.5f - (adepth + mdepth);
 
 */
+dx7patches = Array.newClear(16384),
 vr = Array.fill(256, 63),
 noteArrayDX7 = Array.newClear(128),
 defme, defjamHead, betass = 0, headno, defPitchEnv, noteParser,
@@ -684,15 +685,18 @@ f = { arg x, y ,z; //y value, z cc no
 		{ vr[y + 128] = z }
 	)
 };
+//Creating a patch array from .afx file to prevent "unsaved file" error.
+r = File("DX7.afx".resolveRelative,"r");
+16384.do({arg item;
+	dx7patches[item] = r.getLine;
+});
 
 ~mainCaller = { arg x, y, z;
 	if(y > 0,{
-		r = File("DX7.afx".resolveRelative,"r");
+//		r = File("DX7.afx".resolveRelative,"r");
 		//r = File("/Users/EmanTnuocca/Desktop/3/DX7.afx","r");
-		z.do({
-			r.getLine;
-		});
-		g = r.getLine;
+
+		g = dx7patches[z];
 		145.do({arg item;
 			k = (g.at((item*2)) ++ g.at((item*2) + 1)).asInt;
 			f.value(cirklonCCparse[item][0],cirklonCCparse[item][1],k);
