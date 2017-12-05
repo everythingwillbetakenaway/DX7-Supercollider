@@ -55,14 +55,14 @@ MIDIdef.noteOff(\DX7off, {arg vel, note;
 
 This project is licensed under the GNU General Public License v3.0 - see the [LICENSE.md](LICENSE.md) file for details
 
-## Author
-
-* **Aziz Ege Gonul** - [My Personal Website](http://www.egegonul.com)
-
-
 ## Acknowledgments
 
 * Hat tip to John Chowning
 * STEIM for letting me use their DX7 and espresso machine.
 * and all the anonymous preset makers for the Yamaha DX7 (unsung heroes).
+
+
+## Author
+
+* **Aziz Ege Gonul** - [My Personal Website](http://www.egegonul.com)
 
