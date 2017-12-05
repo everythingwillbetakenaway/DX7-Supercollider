@@ -45,11 +45,6 @@ MIDIdef.noteOff(\DX7off, {arg vel, note;
 },srcID:~midiInINST,chan:0).add;
 ```
 
-
-## Author
-
-* **Aziz Ege Gonul** - [My Personal Website](http://www.egegonul.com)
-
 ## Things to be implemented
 
 * Real time parameter modulation
@@ -59,6 +54,10 @@ MIDIdef.noteOff(\DX7off, {arg vel, note;
 ## License
 
 This project is licensed under the GNU General Public License v3.0 - see the [LICENSE.md](LICENSE.md) file for details
+
+## Author
+
+* **Aziz Ege Gonul** - [My Personal Website](http://www.egegonul.com)
 
 
 ## Acknowledgments
