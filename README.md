@@ -31,18 +31,21 @@ It’s a very straightforward process; the preset number selection can be made b
 Code format example: 
 
 ```
+(
+var presetz = Array.fill(128, 63);
+
 MIDIdef.noteOn(\DX7, {arg vel, note;
-	~mainCaller.value(note, vel, ~cc1 * ~cc2);
-},srcID:~midiInINST,chan:0).add;
+	~mainCaller.value(note, vel, presetz[0] * presetz[1]);
+},srcID:~midiInINST4,chan:2).add;
 
 MIDIdef.cc(\DX7CC, {arg ...args;
-	~cc1 = args[0];
-	~cc2 = args[1];
-},(0..1),srcID:~midiInINST,chan:0).add;
+	presetz[args[1]] = args[0];
+},(0..1),srcID:~midiInINST4,chan:2).add;
 
 MIDIdef.noteOff(\DX7off, {arg vel, note;
 	~mainCaller.value(note, 0);
-},srcID:~midiInINST,chan:0).add;
+},srcID:~midiInINST4,chan:2).add;
+)
 ```
 
 ## Things to be implemented
