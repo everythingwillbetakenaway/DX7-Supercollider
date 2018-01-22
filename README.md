@@ -35,7 +35,7 @@ Code format example:
 var presetz = Array.fill(128, 63);
 
 MIDIdef.noteOn(\DX7, {arg vel, note;
-	~mainCaller.value(note, vel, presetz[0] * presetz[1]);
+	~mainCaller.value(note, vel, (presetz[0] * 128) + presetz[1]);
 },srcID:~midiInINST4,chan:2).add;
 
 MIDIdef.cc(\DX7CC, {arg ...args;
