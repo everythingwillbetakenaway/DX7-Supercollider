@@ -201,7 +201,7 @@ edepth = 127.5f - (adepth + mdepth);
 dx7patches = Array.newClear(16384),
 vr = Array.fill(256, 63),
 noteArrayDX7 = Array.newClear(128),
-defme, defjamHead, betass = 0, headno, defPitchEnv, noteParser,
+defme, defjamHead0, defjamHead1, betass = 0, headno, defPitchEnv, noteParser,
 envCal, dumm, selector = #[66, 48, 54, 60, 66],
 feedbackSel = #[
 	35, 7, 35, 33, 35, 34, 35, 21,
@@ -484,10 +484,8 @@ envCal = { arg // Area of hardcore envelope calculation function.
 };
 
 
-defjamHead = { arg a1;
-	var abc = [], cba = [], algo, fdbIndNo = Array.fill(42, 1), lfoDepth, lfoGet1, lfoGet2;
-	if((a1 == 1),
-		{
+defjamHead1 = {
+	var abc = [], algo, fdbIndNo = Array.fill(42, 1);
 			algo = (vr[128]).clip(0,31);
 			abc = [\outMult, outOscVol[vr[128]]];
 			//abc.postln;
@@ -498,8 +496,10 @@ defjamHead = { arg a1;
 					abc = abc ++ [\dn ++ x, (wf[algo,x] * fdbIndNo[x])];
 			});
 			abc;
-		},
-		{
+};
+
+defjamHead0 = {
+	var cba = [], lfoDepth, lfoGet1, lfoGet2;
 			if(vr[133] == 5, {lfoGet1=1; lfoGet2 =0}, {lfoGet1 = 0; lfoGet2 =1 });
 			lfoDepth = (dx7_voice_pms_to_semitones[vr[138]]) * (vr[135] / 99);
 			//lfoDepth.postln;
@@ -521,8 +521,6 @@ defjamHead = { arg a1;
 			//cba.postln;
 			cba;
 			//a y.removeAt(1); ['a', 'b', 'c'].do({ arg item, i; [i, item].postln; });
-		}
-	);
 };
 
 
@@ -588,7 +586,7 @@ defme = { arg a1,b1;
 		envL[y,4] = envL[y,0];
 	};
 	//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	bil = defjamHead.value(1);
+	bil = defjamHead1.();
 	a =[
 		\pitch, (a1 + vr[131] - 24 ).midicps,
 		\amp, b1.linlin(0,127,-18,18)];
@@ -654,15 +652,15 @@ noteParser = { arg vel, note;
 							headno.free;
 						});
 						betass = 1;
-						headno = Synth.before(novaDX7, \InfEfx, defjamHead.value(0));
+						headno = Synth.before(novaDX7, \InfEfx, defjamHead0.());
 					},
 					{
 						if(betass == 0,   {
 							betass = 1;
-							headno = Synth.before(novaDX7, \InfEfx, defjamHead.value(0))
+							headno = Synth.before(novaDX7, \InfEfx, defjamHead0.())
 						},
 						{
-							headno.set(defjamHead.value(0))
+							headno.set(defjamHead0.())
 						});
 					});
 					noteArrayDX7[note] = Synth(\DX7 ,defme.value(note, vel),novaDX7);
