@@ -201,8 +201,8 @@ edepth = 127.5f - (adepth + mdepth);
 dx7patches = Array.newClear(16384),
 vr = Array.fill(256, 63),
 noteArrayDX7 = Array.newClear(128),
-defme, defjamHead, betass = 0, headno, defPitchEnv, noteParser,
-envCal, dumm, selector = #[66, 48, 54, 60, 66],
+defme, defjamHead0, defjamHead1, betass = 0, headno, defPitchEnv, noteParser,
+scale_vrv, envCal, dumm, selector = #[66, 48, 54, 60, 66],
 feedbackSel = #[
 	35, 7, 35, 33, 35, 34, 35, 21,
 	7, 14, 35,  7, 35, 35,  7, 35,
@@ -400,6 +400,14 @@ SynthDef(\DX7, {
 
 }).add;
 
+scale_vrv = { arg dummy, scaling_curve, scaling_depth, vrv;
+	switch(scaling_curve,
+		0, {(vrv - ((dummy / 45) * scaling_depth).asInt)}, // -lin
+		1, {(vrv - (((dummy - 72) / 13.5).exp * scaling_depth).asInt)}, // -exp
+		2, {(vrv + (((dummy - 72) / 13.5).exp * scaling_depth).asInt)}, // +exp
+		3, {(vrv + ((dummy / 45) * scaling_depth).asInt)} // +lin
+        )
+};
 
 envCal = { arg // Area of hardcore envelope calculation function.
 	vr1, //Level Current
@@ -419,27 +427,11 @@ envCal = { arg // Area of hardcore envelope calculation function.
 	var dummy, velFin, env_L0, env_L1, env_R0, vrvDec, endR0, dbStr, dbEnd;
 	if (((transposed_note < (level_scaling_bkpoint + 21)) && (level_scaling_l_depth > 0)), {
 		dummy = (level_scaling_bkpoint - (((transposed_note + 2) / 3).asInt * 3) + 21);
-		case
-		{ level_scaling_l_curve == 0 } // -lin
-		{vrv = (vrv - ((dummy / 45) * level_scaling_l_depth).asInt)}
-		{ level_scaling_l_curve == 1 } // -exp
-		{vrv = (vrv - (((dummy - 72) / 13.5).exp * level_scaling_l_depth).asInt)}
-		{ level_scaling_l_curve == 2 } // +exp
-		{vrv = (vrv + (((dummy - 72) / 13.5).exp * level_scaling_l_depth).asInt)}
-		{ level_scaling_l_curve == 3 } // +lin
-		{vrv = (vrv + ((dummy / 45) * level_scaling_l_depth).asInt)};
+		vrv = scale_vrv.(dummy, level_scaling_l_curve, level_scaling_l_depth, vrv);
 	});
 	if (((transposed_note > (level_scaling_bkpoint + 21)) && (level_scaling_r_depth > 0)), {
 		dummy = (((transposed_note + 2) / 3).asInt * 3) - level_scaling_bkpoint - 21;
-		case
-		{ level_scaling_r_curve == 0 }   // -lin
-		{vrv = (vrv - ((dummy / 45) * level_scaling_r_depth).asInt)}
-		{ level_scaling_r_curve == 1 }   // -exp
-		{vrv = (vrv - (((dummy - 72) / 13.5).exp * level_scaling_r_depth).asInt)}
-		{ level_scaling_r_curve == 2 }   // +exp
-		{vrv = (vrv + (((dummy - 72) / 13.5).exp * level_scaling_r_depth).asInt)}
-		{ level_scaling_r_curve == 3 }   // +lin
-		{vrv = (vrv + ((dummy / 45) * level_scaling_r_depth).asInt)};
+		vrv = scale_vrv.(dummy, level_scaling_r_curve, level_scaling_r_depth, vrv);
 	});
 	rate_scaling = ((rate_scaling * (transposed_note - 21) / (126.0 - 21.0) * 127.0 / 128.0 * 6.5 )- 0.5).asInt;
 	vrx = (rate_scaling + vrx).clip(0,99);
@@ -484,10 +476,8 @@ envCal = { arg // Area of hardcore envelope calculation function.
 };
 
 
-defjamHead = { arg a1;
-	var abc = [], cba = [], algo, fdbIndNo = Array.fill(42, 1), lfoDepth, lfoGet1, lfoGet2;
-	if((a1 == 1),
-		{
+defjamHead1 = {
+	var abc = [], algo, fdbIndNo = Array.fill(42, 1);
 			algo = (vr[128]).clip(0,31);
 			abc = [\outMult, outOscVol[vr[128]]];
 			//abc.postln;
@@ -498,8 +488,10 @@ defjamHead = { arg a1;
 					abc = abc ++ [\dn ++ x, (wf[algo,x] * fdbIndNo[x])];
 			});
 			abc;
-		},
-		{
+};
+
+defjamHead0 = {
+	var cba = [], lfoDepth, lfoGet1, lfoGet2;
 			if(vr[133] == 5, {lfoGet1=1; lfoGet2 =0}, {lfoGet1 = 0; lfoGet2 =1 });
 			lfoDepth = (dx7_voice_pms_to_semitones[vr[138]]) * (vr[135] / 99);
 			//lfoDepth.postln;
@@ -521,8 +513,6 @@ defjamHead = { arg a1;
 			//cba.postln;
 			cba;
 			//a y.removeAt(1); ['a', 'b', 'c'].do({ arg item, i; [i, item].postln; });
-		}
-	);
 };
 
 
@@ -588,7 +578,7 @@ defme = { arg a1,b1;
 		envL[y,4] = envL[y,0];
 	};
 	//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	bil = defjamHead.value(1);
+	bil = defjamHead1.();
 	a =[
 		\pitch, (a1 + vr[131] - 24 ).midicps,
 		\amp, b1.linlin(0,127,-18,18)];
@@ -654,15 +644,15 @@ noteParser = { arg vel, note;
 							headno.free;
 						});
 						betass = 1;
-						headno = Synth.before(novaDX7, \InfEfx, defjamHead.value(0));
+						headno = Synth.before(novaDX7, \InfEfx, defjamHead0.());
 					},
 					{
 						if(betass == 0,   {
 							betass = 1;
-							headno = Synth.before(novaDX7, \InfEfx, defjamHead.value(0))
+							headno = Synth.before(novaDX7, \InfEfx, defjamHead0.())
 						},
 						{
-							headno.set(defjamHead.value(0))
+							headno.set(defjamHead0.())
 						});
 					});
 					noteArrayDX7[note] = Synth(\DX7 ,defme.value(note, vel),novaDX7);
