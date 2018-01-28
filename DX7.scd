@@ -202,7 +202,7 @@ dx7patches = Array.newClear(16384),
 vr = Array.fill(256, 63),
 noteArrayDX7 = Array.newClear(128),
 defme, defjamHead0, defjamHead1, betass = 0, headno, defPitchEnv, noteParser,
-envCal, dumm, selector = #[66, 48, 54, 60, 66],
+scale_vrv, envCal, dumm, selector = #[66, 48, 54, 60, 66],
 feedbackSel = #[
 	35, 7, 35, 33, 35, 34, 35, 21,
 	7, 14, 35,  7, 35, 35,  7, 35,
@@ -400,6 +400,14 @@ SynthDef(\DX7, {
 
 }).add;
 
+scale_vrv = { arg dummy, scaling_curve, scaling_depth, vrv;
+	switch(scaling_curve,
+		0, {(vrv - ((dummy / 45) * scaling_depth).asInt)}, // -lin
+		1, {(vrv - (((dummy - 72) / 13.5).exp * scaling_depth).asInt)}, // -exp
+		2, {(vrv + (((dummy - 72) / 13.5).exp * scaling_depth).asInt)}, // +exp
+		3, {(vrv + ((dummy / 45) * scaling_depth).asInt)} // +lin
+        )
+};
 
 envCal = { arg // Area of hardcore envelope calculation function.
 	vr1, //Level Current
@@ -419,27 +427,11 @@ envCal = { arg // Area of hardcore envelope calculation function.
 	var dummy, velFin, env_L0, env_L1, env_R0, vrvDec, endR0, dbStr, dbEnd;
 	if (((transposed_note < (level_scaling_bkpoint + 21)) && (level_scaling_l_depth > 0)), {
 		dummy = (level_scaling_bkpoint - (((transposed_note + 2) / 3).asInt * 3) + 21);
-		case
-		{ level_scaling_l_curve == 0 } // -lin
-		{vrv = (vrv - ((dummy / 45) * level_scaling_l_depth).asInt)}
-		{ level_scaling_l_curve == 1 } // -exp
-		{vrv = (vrv - (((dummy - 72) / 13.5).exp * level_scaling_l_depth).asInt)}
-		{ level_scaling_l_curve == 2 } // +exp
-		{vrv = (vrv + (((dummy - 72) / 13.5).exp * level_scaling_l_depth).asInt)}
-		{ level_scaling_l_curve == 3 } // +lin
-		{vrv = (vrv + ((dummy / 45) * level_scaling_l_depth).asInt)};
+		vrv = scale_vrv.(dummy, level_scaling_l_curve, level_scaling_l_depth, vrv);
 	});
 	if (((transposed_note > (level_scaling_bkpoint + 21)) && (level_scaling_r_depth > 0)), {
 		dummy = (((transposed_note + 2) / 3).asInt * 3) - level_scaling_bkpoint - 21;
-		case
-		{ level_scaling_r_curve == 0 }   // -lin
-		{vrv = (vrv - ((dummy / 45) * level_scaling_r_depth).asInt)}
-		{ level_scaling_r_curve == 1 }   // -exp
-		{vrv = (vrv - (((dummy - 72) / 13.5).exp * level_scaling_r_depth).asInt)}
-		{ level_scaling_r_curve == 2 }   // +exp
-		{vrv = (vrv + (((dummy - 72) / 13.5).exp * level_scaling_r_depth).asInt)}
-		{ level_scaling_r_curve == 3 }   // +lin
-		{vrv = (vrv + ((dummy / 45) * level_scaling_r_depth).asInt)};
+		vrv = scale_vrv.(dummy, level_scaling_r_curve, level_scaling_r_depth, vrv);
 	});
 	rate_scaling = ((rate_scaling * (transposed_note - 21) / (126.0 - 21.0) * 127.0 / 128.0 * 6.5 )- 0.5).asInt;
 	vrx = (rate_scaling + vrx).clip(0,99);
