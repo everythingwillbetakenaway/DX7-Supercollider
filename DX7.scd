@@ -545,7 +545,7 @@ defPitchEnv = { arg rate_1, rate_2, rate_3, rate_4, level_1, level_2, level_3, l
 };
 
 
-defme = { arg a1,b1;
+defme = { arg note, vel;
 	var a , bil, ptchEnv,
 	envL  = Array2D.new(6,5),
 	envR  = Array2D.new(6,4),
@@ -560,14 +560,14 @@ defme = { arg a1,b1;
 					vr[selector[x + 1] + y],//vr2, //Level Next
 					(99-vr[(24 + (x * 6)) + y]),//vrx, //Speed
 					vr[6 + y],//vrv, //Volume
-					b1,//velo,//Velocity
+					vel,//velo,//Velocity
 					vr[108 + y],//velSens,
 					vr[78 + y],//level_scaling_bkpoint,
 					vr[90 + y],//level_scaling_l_depth,
 					vr[102 + y],//level_scaling_r_depth,
 					vr[84 + y],//level_scaling_l_curve,
 					vr[96 + y],//level_scaling_r_curve,
-					(a1 + 3 + vr[131] - 24),//transposed_note,
+					(note + 3 + vr[131] - 24),//transposed_note,
 					vr[72 + y],//rate_scaling,//not implemented yer
 					vr[18 + y]//amp_mod_sens;//no
 				);
@@ -580,8 +580,8 @@ defme = { arg a1,b1;
 	//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	bil = defjamHead1.();
 	a =[
-		\pitch, (a1 + vr[131] - 24 ).midicps,
-		\amp, b1.linlin(0,127,-18,18)];
+		\pitch, (note + vr[131] - 24 ).midicps,
+		\amp, vel.linlin(0,127,-18,18)];
 	6.do { arg c;
 		var trCoarse, trFine, trDetune, bloke;//176
 		if(vr[176 + c] == 0, //midi CC 128 + 48 fixed frequency
