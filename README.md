@@ -27,10 +27,14 @@ You can try these kinds of example by running the code at the very end of the DX
 
 ### Basic MIDI implementation
 
-It’s a very straightforward process; the preset number selection can be made by two different MIDI CCs. At total 128 * 128 = 16384 number is needed, which makes you able to choose the entire library of presets (2 ^ 14). 
-Code format example: 
+It’s a very straightforward process; the preset number selection can be made by two different MIDI CCs. At total 128 * 128 = 16384 number is needed, which makes you able to choose the entire library of presets (2 ^ 14).
+Code format example:
 
-```
+``` supercollider
+( // init
+	s.boot;
+  ~mainCaller = ("./DX7.scd").loadRelative.wrapAt(-1);
+)
 (
 var presetz = Array.fill(128, 63);
 
@@ -68,4 +72,3 @@ This project is licensed under the GNU General Public License v3.0 - see the [LI
 ## Author
 
 * **Aziz Ege Gonul** - [My Personal Website](http://www.egegonul.com)
-

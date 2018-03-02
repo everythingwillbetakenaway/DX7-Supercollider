@@ -2,14 +2,6 @@
 // Implemented by Aziz Ege Gonul for more info go to www.egegonul.com
 // Under GNU GPL 3 as per SuperCollider license
 
-//Example
-( // Note On 80 message with velocity value 100 and preset value 10000
-~mainCaller.value(80, 100, 10002);
-)
-( // Note Off message
-~mainCaller.value(80, 0);
-)
-
 /*
 %%%---INSTRUCTIONS---%%%
 1) Put the DX7.afx file in the same directory of this file. (If you don't have it you can download it from "http://www.egegonul.com/DX7.afx.zip")
@@ -35,7 +27,9 @@ important notes:
 
 //First compile below
 (
-var novaDX7 = ParGroup.new,
+var mainCaller,
+
+novaDX7 = ParGroup.new,
 
 coarseArrR = #[0.5,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31],
 
@@ -680,7 +674,7 @@ r = File("DX7.afx".resolveRelative,"r");
 	dx7patches[item] = r.getLine;
 });
 
-~mainCaller = { arg x, y, z;
+mainCaller = { arg x, y, z;
 	if(y > 0,{
 //		r = File("DX7.afx".resolveRelative,"r");
 		//r = File("/Users/EmanTnuocca/Desktop/3/DX7.afx","r");
@@ -710,28 +704,5 @@ Things to be implemented in future:
 -Adding your own DX7 preset option will be implemented.
 -Add some examples of original DX7 sounds compared with this Synthdef in order to show accuracy. (During my initial tests it was hard to determine which one is which with the blind tests)
 -That's all folks, for questions just drop a mail to egegonul@egegonul.com
-
-
-//Some fun example below. Uncomment this area and run the below parenthesis for random preset and pitch for each note. Check CPU!!
-
-(
-~number = 15000.rand; //preset start number, dont go further than 16383
-~ra = Routine {
-303.do({ arg a;
-~sun = 99.rand + 10;
-~mainCaller.value(~sun, 127.rand, ~number);
-((50.rand)/100).wait; // Waits for at most half second between each node
-~mainCaller.value(~sun, 0, ~number);
-~number = ~number +1;
-});
-// Wait half second before saying we're done
-0.5.wait;
-"done".postln;
-}.play;
-)
-(//stop
-~ra.stop;
-~mainCaller.value(~sun, 0, ~number);
-)
 
 */
