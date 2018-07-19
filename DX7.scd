@@ -291,7 +291,7 @@ SynthDef(\InfEfx, {
 	arg outBus=0, gate,
 	lfoGet1 = 0, lfoGet2=1,
 	lfo_speed, lfo_wave, lfo_phase,
-	lfo_delay, lfo_amd, pitchCons,envTrig, tameC, tameM,
+	lfo_delay, lfo_amd, pitchCons,envTrig, tameC, tameM;
 	//
 	var lfo, pitchenv, output, randomlfo, multiPitch, lfoAmp;
 	//
@@ -316,7 +316,7 @@ SynthDef(\InfEfx, {
 
 
 SynthDef(\DX7, {
-	arg outBus=2, pitch, gate = 1,
+	arg outBus=0, pitch, gate = 1,
 	envPL0, envPL1, envPL2, envPL3, envPL4, envPR0, envPR1, envPR2, envPR3,
 	coars1, fine_1,	coars2, fine_2,	coars3, fine_3,	coars4, fine_4,	coars5, fine_5,	coars6, fine_6,
 	env1L0, env1L1, env1L2, env1L3, env1L4, env1R0, env1R1, env1R2, env1R3, env1C0, env1C1, env1C2, env1C3,
