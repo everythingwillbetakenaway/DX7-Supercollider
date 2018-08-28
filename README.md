@@ -18,9 +18,9 @@ The only requirement is to install the SC3-Plugins Ugen library because I use th
 
 Here are some sound examples which calls a random preset for each new node:
 
-[Example 1](https://soundcloud.com/ewbta/dx-7-sc-clone-demo-2)
+[Example 1](https://soundcloud.com/stegeht/dx-7-sc-clone-demo-2)
 
-[Example 2](https://soundcloud.com/ewbta/dx7-clone-sounds)
+[Example 2](https://soundcloud.com/stegeht/dx7-clone-sounds)
 
 You can try these kinds of example by running the code at the very end of the DX7.scd file.
 
