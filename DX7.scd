@@ -17,6 +17,13 @@ important notes:
 -Sometimes you see "FAILURE IN SERVER /n_free Node 808 not found" message, this is due to the DetectSilence.ar UGen which helps me to close some forgotten notes in combination with FreeSelfWhenDone (Sometimes nodes skips detect silence because of DC component). FreeSelfDone commmand has a 10 second duration. So if you need longer duration please increase the argument but don't comment out completely.
 -You can ignore all the commented out areas. It is mostly for debug use. Everything works perfectly. Nothing to worry about.
 
+UPDATE: A note about note-off implementation (will be fixed May 2020):
+I received a couple of emails about this issue, so I am copying here is one of my answers.
+Q: I'm just getting into SC and ran across the DX7 clone.  I'm only a couple days into SC and only today learned how to connect a MIDI keyboard into a SynthDef.  Not sure I'm even calling into your clone correctly as I'm note sure I need to implement a noteOff of some sort.
+A: I will get back to it and add lots of new stuff (parameter modulation, micro tuning, finding a good solution for note-offs). Let's say May for DX7.scd, coz for the time being, I got too much work to do. The thing with note-off is, original DX7 doesn't have any mechanism like this. It has some arbitrary number of voices. It has a 16-Polyphony voice, and every new note creates from one of the least recent notes. I couldn't add standard MIDI note-off because each new note has very different release times, and with exponential formulas, it just goes to infinity. So I added Detectsilence.ar option for each new note, but it wasn't working perfectly (it was closing node without no option of notification), and there were always some stuck notes. So I simply add:  FreeSelfWhenDone.kr(Line.kr(0, 1, 10));
+and eventually removed Detectsilence.ar. This is a 10-second time-bomb. So for note-off, I recommend adding maybe Detectsilence in combination with FreeSelfWhenDone. But for a SC beginner, your best bet is to change the FreeSelfWhenDone parameter from 10 seconds to something longer in duration. I know this is CPU intensive, but DX7 has lots of things going on, and maybe with a multi-core processing option, you can create lots of voices. I used it only for 2 to 4 voices, so I never had an issue of CPU with it. I also know this current handling of note-off seems very sluggish, and I will fix it ASAP, but I must say everything else is %100 clone of DX-7, wish I kept original vs. SC sound files. This project is a really magnum opus clone project (aside from current note-off handling, which I will fix for sure).
+
+
 //order of things: [note, velocity, preset]
 //note value range: 0 - 127
 //velocity value range: 0 - 127
