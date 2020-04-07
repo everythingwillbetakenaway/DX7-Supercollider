@@ -4,7 +4,7 @@
 
 /*
 %%%---INSTRUCTIONS---%%%
-1) Put the DX7.afx file in the same directory of this file. (If you don't have it you can download it from "http://www.egegonul.com/DX7.afx.zip")
+1) Put the GX2.rob file in the same directory of this file. (If you don't have it you can download it from "http://www.egegonul.com/GX2.rob.zip")
 2) Compile the parenthesis below.
 3) Run the ~mainCaller.value function with the desired note, velocity and preset values.
 
@@ -675,8 +675,8 @@ f = { arg x, y ,z; //y value, z cc no
 	)
 };
 
-//Creating a patch array from .afx file to prevent "unsaved file" error.
-r = File("DX7.afx".resolveRelative,"r");
+//Creating a patch array from .rob file to prevent "unsaved file" error.
+r = File("GX2.rob".resolveRelative,"r");
 16384.do({arg item;
 	dx7patches[item] = r.getLine;
 });
@@ -698,7 +698,7 @@ mainCaller = { arg note, vel, preset;
 extra notes from the developer:
 -I've designed this instrument as accurately as possible to the original DX7, all the presets are collected from the vast DX7 libraries across the internet. Some presets were corrupt so I cleaned them according to their unused indexes but there might be still some that might not work. (I haven't found out yet)
 -I've worked on this project extensively during my STEIM internship, and compared every tiny bit of detail with the Original DX7 and reverse engineered the C++ code from the best parts of DX7 VSTs out there.
--File extension .afx is just an arbitrary name, I chose it because of my admiration to Mr.RichardDavidJames <3.
+-File extension .rob is just an arbitrary name.
 -Original DX7 sysex files were converted with the help of Propellerhead's DX7 conversion tool and from there I implemented my own convention, which is just sequence of numbers stacked together, each line is one preset.
 
 Things to be implemented in future:
