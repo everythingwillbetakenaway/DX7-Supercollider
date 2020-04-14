@@ -66,7 +66,7 @@ This project is licensed under the GNU General Public License v3.0 - see the [LI
 
 * Hat tip to John Chowning
 * STEIM for letting me use their DX7 and espresso machine.
-* and all the anonymous preset makers for the Yamaha DX7 (unsung angels).
+* and all the anonymous preset makers for the Yamaha DX7 (unsung heroes/angels).
 
 
 ## Author
