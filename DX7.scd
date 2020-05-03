@@ -698,7 +698,7 @@ mainCaller = { arg note, vel, preset;
 extra notes from the developer:
 -I've designed this instrument as accurately as possible to the original DX7, all the presets are collected from the vast DX7 libraries across the internet. Some presets were corrupt so I cleaned them according to their unused indexes but there might be still some that might not work. (I haven't found out yet)
 -I've worked on this project extensively during my STEIM internship, and compared every tiny bit of detail with the Original DX7 and reverse engineered the C++ code from the best parts of DX7 VSTs out there.
--File extension .afx derived from AFX, an alias name of a band called Aphex's Tween.
+-File extension .afx derived from AFX, an alias name of a band called Apex's Tween.
 -Original DX7 sysex files were converted with the help of Propellerhead's DX7 conversion tool and from there I implemented my own convention, which is just sequence of numbers stacked together, each line is one preset.
 
 Things to be implemented in future:
