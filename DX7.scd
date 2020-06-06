@@ -698,13 +698,19 @@ mainCaller = { arg note, vel, preset;
 extra notes from the developer:
 -I've designed this instrument as accurately as possible to the original DX7, all the presets are collected from the vast DX7 libraries across the internet. Some presets were corrupt so I cleaned them according to their unused indexes but there might be still some that might not work. (I haven't found out yet)
 -I've worked on this project extensively during my STEIM internship, and compared every tiny bit of detail with the Original DX7 and reverse engineered the C++ code from the best parts of DX7 VSTs out there.
--File extension .afx derived from AFX, an alias name of a band called Apex's Tween.
+-File extension .afx derived from AFX, an alias name of a band called Aphex Twin, which released Analord 01, Analord 02, Analord 03, Analord 04, Analord 05, Analord 06, Analord 07, Analord 08, Analord 09, Analord 11 and Analogue Bubblebath 3, 4 & 5 and bunch of other stuff.
+-For Analord owners, be sure to remove plastic envelopes with a paper sleeve to protect the record.
+-I believe each Analord volume has a corresponding soul twin; they pair beautifully with each other and go hand in hand. (1<=>5 or 1<=>6),(2<=>4),(9<=>11),(3<=>8 or 3<=>7),(10<=>10).
 -Original DX7 sysex files were converted with the help of Propellerhead's DX7 conversion tool and from there I implemented my own convention, which is just sequence of numbers stacked together, each line is one preset.
 
-Things to be implemented in future:
+Things to be implemented in Q3 2020:
 -I will implement a function which will help to send all parameters of DX7. (It has 146 different parameters).
--Adding your own DX7 preset option will be implemented.
--Add some examples of original DX7 sounds compared with this Synthdef in order to show accuracy. (During my initial tests it was hard to determine which one is which with the blind tests)
--That's all folks, for questions just drop a mail to egegonul@egegonul.com
+-Adding your own DX7 preset (Propellerhead PX7) option will be implemented.
+-That's all folks, for questions just drop a mail to ege@gatech.edu.
+-Preset file list with original preset names with rating system.
 
+Things to be implemented when I have access to a DX7:
+-Add some examples of original DX7 sounds compared with this Synthdef in order to show accuracy. (During my initial tests it was hard to determine which one is which with the blind tests)
+
+ege
 */
