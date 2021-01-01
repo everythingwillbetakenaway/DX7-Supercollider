@@ -24,7 +24,7 @@ Here are some sound examples which calls a random preset for each new node:
 
 You can try these kinds of example by running the code at the very end of the DX7.scd file.
 
-edit: I deleted my Soundcloud and opened another one and couldn't find the original files so links goes to my new Soundcloud account. Check for good music reposts.
+edit: I deleted my Soundcloud and opened another one and couldn't find the original files so links goes to my new Soundcloud account. Tune in for some experimental music reposts and tracks I made.
 
 
 ### Basic MIDI implementation
