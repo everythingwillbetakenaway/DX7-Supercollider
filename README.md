@@ -18,11 +18,13 @@ The only requirement is to install the SC3-Plugins Ugen library because I use th
 
 Here are some sound examples which calls a random preset for each new node:
 
-[Example 1](https://soundcloud.com/best-prices/dx-7-sc-clone-demo-2)
+[Example 1](https://soundcloud.com/exiouz)
 
-[Example 2](https://soundcloud.com/best-prices/dx7-clone-sounds)
+[Example 2](https://soundcloud.com/exiouz)
 
 You can try these kinds of example by running the code at the very end of the DX7.scd file.
+
+edit: I deleted my Soundcloud and opened another one and couldn't find the original files so links goes to my new Soundcloud account. Check for good music reposts.
 
 
 ### Basic MIDI implementation
