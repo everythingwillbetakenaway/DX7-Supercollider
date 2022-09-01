@@ -402,10 +402,10 @@ SynthDef(\DX7, {
 
 scale_vrv = { arg dummy, scaling_curve, scaling_depth, vrv;
 	switch(scaling_curve,
-		0, {(vrv - ((dummy / 45) * scaling_depth).asInt)}, // -lin
-		1, {(vrv - (((dummy - 72) / 13.5).exp * scaling_depth).asInt)}, // -exp
-		2, {(vrv + (((dummy - 72) / 13.5).exp * scaling_depth).asInt)}, // +exp
-		3, {(vrv + ((dummy / 45) * scaling_depth).asInt)} // +lin
+		0, {(vrv - ((dummy / 45) * scaling_depth).asInteger)}, // -lin
+		1, {(vrv - (((dummy - 72) / 13.5).exp * scaling_depth).asInteger)}, // -exp
+		2, {(vrv + (((dummy - 72) / 13.5).exp * scaling_depth).asInteger)}, // +exp
+		3, {(vrv + ((dummy / 45) * scaling_depth).asInteger)} // +lin
         )
 };
 
@@ -426,14 +426,14 @@ envCal = { arg // Area of hardcore envelope calculation function.
 	amp_mod_sens;//not sure if i put this globa
 	var dummy, velFin, env_L0, env_L1, env_R0, vrvDec, endR0, dbStr, dbEnd;
 	if (((transposed_note < (level_scaling_bkpoint + 21)) && (level_scaling_l_depth > 0)), {
-		dummy = (level_scaling_bkpoint - (((transposed_note + 2) / 3).asInt * 3) + 21);
+		dummy = (level_scaling_bkpoint - (((transposed_note + 2) / 3).asInteger * 3) + 21);
 		vrv = scale_vrv.(dummy, level_scaling_l_curve, level_scaling_l_depth, vrv);
 	});
 	if (((transposed_note > (level_scaling_bkpoint + 21)) && (level_scaling_r_depth > 0)), {
-		dummy = (((transposed_note + 2) / 3).asInt * 3) - level_scaling_bkpoint - 21;
+		dummy = (((transposed_note + 2) / 3).asInteger * 3) - level_scaling_bkpoint - 21;
 		vrv = scale_vrv.(dummy, level_scaling_r_curve, level_scaling_r_depth, vrv);
 	});
-	rate_scaling = ((rate_scaling * (transposed_note - 21) / (126.0 - 21.0) * 127.0 / 128.0 * 6.5 )- 0.5).asInt;
+	rate_scaling = ((rate_scaling * (transposed_note - 21) / (126.0 - 21.0) * 127.0 / 128.0 * 6.5 )- 0.5).asInteger;
 	vrx = (rate_scaling + vrx).clip(0,99);
 	vrv = vrv.clip(0,99);
 	velFin = (velTable[velo] * velSens);
@@ -467,7 +467,7 @@ envCal = { arg // Area of hardcore envelope calculation function.
 		},
 
 		{
-			(voice_eg_rate_rise_duration[vrx] * (dx7_voice_eg_rate_rise_percent[((((vr2 * vrv) / 99) + velFin).clip(0,99)).asInt] - dx7_voice_eg_rate_rise_percent[((((vr1 * vrv) / 99) + velFin).clip(0,99)).asInt]))
+			(voice_eg_rate_rise_duration[vrx] * (dx7_voice_eg_rate_rise_percent[((((vr2 * vrv) / 99) + velFin).clip(0,99)).asInteger] - dx7_voice_eg_rate_rise_percent[((((vr1 * vrv) / 99) + velFin).clip(0,99)).asInteger]))
 		}
 	);
 	//[dbStr, dbEnd, endR0].postln;
@@ -685,7 +685,7 @@ mainCaller = { arg note, vel, preset;
 	if(vel > 0,{
 		var g = dx7patches[preset%16384];
 		145.do({arg item;
-			var k = (g.at((item*2)) ++ g.at((item*2) + 1)).asInt;
+			var k = (g.at((item*2)) ++ g.at((item*2) + 1)).asInteger;
 			f.value(cirklonCCparse[item][0],cirklonCCparse[item][1],k);
 			//~midiOutDX7.control(~cirklonCCparse[item][0],~cirklonCCparse[item][1],k);
 		});
