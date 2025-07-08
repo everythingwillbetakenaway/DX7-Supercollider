@@ -682,7 +682,6 @@ mainCaller = { arg note, vel, preset;
 )
 
 /*
-
 important notes:
 -FM7.ar plugin is needed (It comes with the SC3 plugins).
 -Velocity value, drastically changes the overall timbre of sound.
@@ -702,11 +701,12 @@ extra notes from the developer:
 -Original DX7 sysex files were converted with the help of Propellerhead's DX7 conversion tool and from there I implemented my own convention, which is just sequence of numbers stacked together, each line is one preset.
 
 Things to be implemented in the future:
--I will implement a function which will help to modulate all parameters of DX7. (It has 146 different parameters).
--Adding your own DX7 preset (Propellerhead PX7) option will be implemented.
+-I will implement a function which will help to modulate all parameters of DX7. (It has 146 different parameters). Meanwhile you can do it yourself. Check my DX8 examples in other repos. It works flawlessly with a sequencer capable of handling MIDI CC.
+-Microtonality function, using this notation scheme https://github.com/shimpe/mitola
 
 Things to be implemented when I have access to a DX7:
 -Add some examples of original DX7 sounds compared with this Synthdef in order to show accuracy. (During my initial tests it was hard to determine which one is which with the blind tests)
+-Adding your own DX7 preset (Propellerhead PX7) option will be implemented.
 
 UPDATE May-2020: A note about note-off implementation:
 I received a couple of emails about this issue, so I am copying here one of my answers.
