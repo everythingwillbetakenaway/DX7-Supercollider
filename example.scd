@@ -4,18 +4,20 @@
 
 //Example
 
-//STEP 1 - START THE SERVER (cmd+enter or control+enter)
+//STEP 1 - START THE SERVER (Command+Enter or Control+Enter)
 ( // init
 	// Server.killAll
 	s.boot;
 )
 
-//STEP 2 - LOAD THE FILE BELOW
+//STEP 2 WAIT FOR SERVER TO LOAD (Until it shows green colors in the bottom right bar)
+
+//STEP 3 - LOAD THE FILE BELOW
 (
 ~mainCaller = ("./DX7.scd").loadRelative.wrapAt(-1);
 )
 
-//STEP 3 - FIRST NOTE
+//STEP 4 - FIRST NOTE
 ( // Note On 80 message with velocity value 100 and preset value 10000
     ~mainCaller.value(80, 10, 10000);
 )
