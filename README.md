@@ -47,10 +47,6 @@ MIDIdef.noteOff(\DX7off, {arg vel, note;
 * Loading custom DX7 presets
 * Some cosmetic updates.
 
-## License
-
-This project is licensed under the GNU General Public License v3.0 - see the [LICENSE.md](LICENSE.md) file for details
-
 ## Acknowledgments
 
 * Hat tip to John Chowning
@@ -64,3 +60,7 @@ The music I create using Supercollider, Max/MSP, Eurorack, hardware synths, sequ
 [Soundcloud](https://soundcloud.com/aegae)
 
 All tracks are microtonal!
+
+## License
+
+This project is licensed under the GNU General Public License v3.0 - see the [LICENSE.md](LICENSE.md) file for details
