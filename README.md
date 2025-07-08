@@ -47,14 +47,6 @@ MIDIdef.noteOff(\DX7off, {arg vel, note;
 * Loading custom DX7 presets
 * Some cosmetic updates.
 
-## My Music
-
-Here is the music I create using Supercollider, Max/MSP, Eurorack, hardware synths, sequencers, and instrument playing (all in microtuning):
-
-[Soundcloud](https://soundcloud.com/azizegegonul)
-
-Let me know if you'd like further tweaks!
-
 ## License
 
 This project is licensed under the GNU General Public License v3.0 - see the [LICENSE.md](LICENSE.md) file for details
@@ -65,7 +57,10 @@ This project is licensed under the GNU General Public License v3.0 - see the [LI
 * STEIM for letting me use their DX7 and espresso machine.
 * and all the anonymous preset makers for the Yamaha DX7 (unsung heroes/angels).
 
-
 ## Author
 
-* **Aziz Ege Gonul** - [My Personal Website](http://www.egegonul.com)
+Here is the music I create using Supercollider, Max/MSP, Eurorack, hardware synths, sequencers, and instrument playing (all in microtuning):
+
+[Soundcloud](https://soundcloud.com/azizegegonul)
+
+Let me know if you'd like further tweaks!
