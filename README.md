@@ -49,7 +49,7 @@ MIDIdef.noteOff(\DX7off, {arg vel, note;
 
 ## My Music
 
-Here is the music I create using Supercollider, Max/MSP, Eurorack, hardware synths, sequencers, and instrument playing:
+Here is the music I create using Supercollider, Max/MSP, Eurorack, hardware synths, sequencers, and instrument playing (all in microtuning):
 
 [Soundcloud](https://soundcloud.com/azizegegonul)
 
