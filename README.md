@@ -61,6 +61,6 @@ This project is licensed under the GNU General Public License v3.0 - see the [LI
 
 Here is the music I create using Supercollider, Max/MSP, Eurorack, hardware synths, sequencers, and instrument playing:
 
-[Soundcloud](https://soundcloud.com/azizegegonul)
+[Soundcloud](https://soundcloud.com/aegae)
 
 All tracks are microtonal!
