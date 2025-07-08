@@ -47,12 +47,6 @@ MIDIdef.noteOff(\DX7off, {arg vel, note;
 * Loading custom DX7 presets
 * Some cosmetic updates.
 
-## Acknowledgments
-
-* Hat tip to John Chowning
-* STEIM for letting me use their DX7 and espresso machine.
-* and all the anonymous preset makers for the Yamaha DX7 (unsung heroes).
-
 ## Author
 
 The music I create using Supercollider, Max/MSP, Eurorack, hardware synths, sequencers, and instrument playing:
@@ -60,6 +54,12 @@ The music I create using Supercollider, Max/MSP, Eurorack, hardware synths, sequ
  [Soundcloud](https://soundcloud.com/aegae)
 
 All tracks are microtonal!
+
+## Acknowledgments
+
+* Hat tip to John Chowning
+* STEIM for letting me use their DX7 and espresso machine.
+* and all the anonymous preset makers for the Yamaha DX7 (unsung heroes).
 
 ## License
 
