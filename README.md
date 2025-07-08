@@ -55,11 +55,11 @@ This project is licensed under the GNU General Public License v3.0 - see the [LI
 
 * Hat tip to John Chowning
 * STEIM for letting me use their DX7 and espresso machine.
-* and all the anonymous preset makers for the Yamaha DX7 (unsung heroes/angels).
+* and all the anonymous preset makers for the Yamaha DX7 (unsung heroes).
 
 ## Author
 
-Here is the music I create using Supercollider, Max/MSP, Eurorack, hardware synths, sequencers, and instrument playing:
+The music I create using Supercollider, Max/MSP, Eurorack, hardware synths, sequencers, and instrument playing:
 
 [Soundcloud](https://soundcloud.com/aegae)
 
