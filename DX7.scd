@@ -5,8 +5,8 @@
 /*
 %%%---INSTRUCTIONS---%%%
 1) Put the DX7.afx file in the same directory of this file.
-2) Compile the parenthesis below.
-3) Run the ~mainCaller.value function with the desired note, velocity and preset values.
+2) Open the example.scd
+3) Run the functions one by one with a desired note, velocity and preset values.
 
 //order of things: [note, velocity, preset]
 //note value range: 0 - 127
