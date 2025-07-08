@@ -4,19 +4,26 @@
 
 //Example
 
+//STEP 1 - START THE SERVER (cmd+enter or control+enter)
 ( // init
 	// Server.killAll
 	s.boot;
-    ~mainCaller = ("./DX7.scd").loadRelative.wrapAt(-1);
 )
 
+//STEP 2 - LOAD THE FILE BELOW
+(
+~mainCaller = ("./DX7.scd").loadRelative.wrapAt(-1);
+)
+
+//STEP 3 - FIRST NOTE
 ( // Note On 80 message with velocity value 100 and preset value 10000
-    ~mainCaller.value(80, 100, 10000);
+    ~mainCaller.value(80, 10, 10000);
 )
 
 ( // Note Off message
 	~mainCaller.value(80, 0);
 )
+
 /*
 //Some fun example below. Uncomment this area and run the below parenthesis for random preset and pitch for each note. Check CPU!!
 (
@@ -38,5 +45,4 @@
 ~ra.stop;
 ~mainCaller.value(~sun, 0, ~number);
 )
-
 */
