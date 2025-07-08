@@ -13,6 +13,9 @@
 //velocity value range: 0 - 127
 //preset value range: 0 - 16383 (2 ^ 14)
 //example: ~mainCaller.value(note,velocity,preset)
+
+//Change this value of 10 (seconds) to a higher number for notes to be longer: 
+//FreeSelfWhenDone.kr(Line.kr(0, 1, 10));
 //for more extra info go to the end of this file
 */
 
