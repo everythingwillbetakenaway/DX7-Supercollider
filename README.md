@@ -57,7 +57,7 @@ MIDIdef.noteOff(\DX7off, {arg vel, note;
 
 The music I create using Supercollider, Max/MSP, Eurorack, hardware synths, sequencers, and instrument playing:
 
-*[Soundcloud](https://soundcloud.com/aegae)
+ [Soundcloud](https://soundcloud.com/aegae)
 
 All tracks are microtonal!
 
