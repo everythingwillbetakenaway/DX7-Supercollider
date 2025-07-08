@@ -14,15 +14,6 @@ The only requirement is to install the SC3-Plugins Ugen library because I use th
 
 [SC3-Plugins](https://github.com/supercollider/sc3-plugins)
 
-### Sound Examples
-
-Here are some sound examples which calls a random preset for each new node:
-
-[Example](https://soundcloud.com/testing-and-infesting/supercollider-dx-7-demo)
-
-You can try these kinds of example by running the code at the very end of the DX7.scd file.
-
-
 ### Basic MIDI implementation
 
 It’s a very straightforward process; the preset number selection can be made by two different MIDI CCs. At total 128 * 128 = 16384 number is needed, which makes you able to choose the entire library of presets (2 ^ 14).
@@ -55,6 +46,14 @@ MIDIdef.noteOff(\DX7off, {arg vel, note;
 * Real time parameter modulation
 * Loading custom DX7 presets
 * Some cosmetic updates.
+
+## My Music
+
+Here is the music I create using Supercollider, Max/MSP, Eurorack, hardware synths, sequencers, and instrument playing:
+
+[Soundcloud](https://soundcloud.com/azizegegonul)
+
+Let me know if you'd like further tweaks!
 
 ## License
 
