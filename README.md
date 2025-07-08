@@ -59,8 +59,8 @@ This project is licensed under the GNU General Public License v3.0 - see the [LI
 
 ## Author
 
-Here is the music I create using Supercollider, Max/MSP, Eurorack, hardware synths, sequencers, and instrument playing (all in microtuning):
+Here is the music I create using Supercollider, Max/MSP, Eurorack, hardware synths, sequencers, and instrument playing:
 
 [Soundcloud](https://soundcloud.com/azizegegonul)
 
-Let me know if you'd like further tweaks!
+All tracks are microtonal!
