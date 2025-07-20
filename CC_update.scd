@@ -418,7 +418,7 @@ it's seperated in two channels 3 and 4,
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
-here is another example from my inferno.scd (dx7.scd) named as inferno (but basically its just the original DX7.scd, named only for my own system, named after 2005 WoW Desolace Inferno Warlock hunt with the Subjugate Demon spell.., then the Inferno spell came mid level 50)
+here is another example from my inferno.scd (dx7.scd) named as inferno (but basically its just the original DX7.scd, only "replaced (cmd+R)" the name for my own system, named after 2005 WoW Desolace Inferno Warlock hunt with the Subjugate Demon spell.., then the Inferno spell came mid level 50)
 MIDIdef.cc(\InfernoCC1, {arg ...args;
 	//args[0].postln;
 	vr[args[1]] = args[0];
