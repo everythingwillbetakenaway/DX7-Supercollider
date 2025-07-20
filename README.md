@@ -43,7 +43,7 @@ MIDIdef.noteOff(\DX7off, {arg vel, note;
 
 ## Things to be implemented
 
-* Real time parameter modulation (works fully but you have to implement yourself for your own system). Parameter control is beta but still somehow at Alpha stage for people to implement themselves (you have to write only one line of function in order to use, it's already working but you have to make a mechanism for holding parameter data from each new preset, to see parameters and change) , of course you can always override (or bypass) and send parameter control without reading from the preset. Check the end of the CC_update.scd file for more info about parameter control. Added a "rowdy comment".
+* Real time parameter modulation (works fully but you have to implement yourself for your own system). You have to write only one line of function in order to use, it's already working but you have to make a mechanism for holding parameter data from each new preset, to see parameters and change. Of course you can always override (or bypass) and send parameter control without reading from the preset. Check the end of the CC_update.scd file for more info about parameter control. Added a "rowdy comment". If you are beginner, ignore this completely, and CC_update.scd,
 * Loading custom DX7 presets
 * Some cosmetic updates.
 
