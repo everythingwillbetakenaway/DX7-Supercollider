@@ -399,8 +399,17 @@ Mono/Poly
 ps
 Sorry for adding this CC after all these years, but you have to understand that, you are basically at my bedroom musician setup DX7 code, and I don't owe you anything, especially at a time when my life is basically: 7 days empty a year seems like heaven, and this went for 10 years straight. So before asking why did I not include CC notes in the first release, consider that, I don't get anything in return, also as this case, with many cases with solo open-source projects, developer has all the right to do whatever he wants, you cannot impose me in anyway a claim/request/comment, there is no hieararchy here, or a cop saying: you cannot change this project to a blog post about DSP (i won't), or why is this code not fitted in Pbind, well figure it out yourself than, and be thankful that, I bring a code that brings a value to your music system, and as luckily as a happy ending, you can now do it yourself, basic code for CC, so maybe Go ahead try, it should take 1/10000th time I spent for DX7 project to debug this CC messages yourself and trust this strangers advice that the sound of modulating CC is amazing. //aggression fades off
 
-//here is a beginning
+~DX7.control(3, 0,  3);
+~DX7.control(3, 1,  3);
+~DX7.control(3, 2,  3);
+~DX7.control(3, 3,  3);
+~DX7.control(3, 4,  3);
+~DX7.control(3, 5,  3);//Osc Coarse
+added at the end for some reason, means this is all Osc Course, and CC 0, 1, 2, 3, 4, 5, are all Osc Coarse of different DX7 operators (respectively)
+
+//here is a beginning, you should just send, two arguments, check DX7.scd, its embedded in it (CC values),
 MIDIdef.cc(\DX7CC, {arg ...args;
 	presetz2[args[1]] = args[0];
 },(0..1),srcID:~midiInINST4,chan:5).add;
+
 */
