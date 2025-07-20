@@ -415,4 +415,22 @@ MIDIdef.cc(\DX7CC, {arg ...args;
 it's seperated in two channels 3 and 4,
 3 for operators
 4 for global parameters that control 6 of the individual sinus generating operators (oscillators)
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+
+here is another example from my inferno.scd (dx7.scd) named as inferno
+MIDIdef.cc(\InfernoCC1, {arg ...args;
+	//args[0].postln;
+	vr[args[1]] = args[0];
+	headno.set(defjamHead.value(0));
+	//~novaInferno.set(defme.value(0));
+},(0..127),srcID:~midiInINST4,chan:3);
+MIDIdef.cc(\InfernoCC2, {arg ...args;
+	//args[0].postln;
+	vr[args[1] + 128] = args[0];
+	//~novaInferno.set(defme.value(0));
+
+more info:
+https://github.com/everythingwillbetakenaway/Main-Supercollider-Files/blob/master/Inferno.scd
+//warning old style of DX7 project, its just for you to see how I implemented MIDI CC
 */
