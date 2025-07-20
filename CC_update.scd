@@ -412,4 +412,7 @@ MIDIdef.cc(\DX7CC, {arg ...args;
 	presetz2[args[1]] = args[0];
 },(0..1),srcID:~midiInINST4,chan:5).add;
 
+it's seperated in two channels 3 and 4,
+3 for operators
+4 for global parameters that control 6 of the individual sinus generating operators (oscillators)
 */
