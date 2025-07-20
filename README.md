@@ -43,7 +43,7 @@ MIDIdef.noteOff(\DX7off, {arg vel, note;
 
 ## Things to be implemented
 
-* Real time parameter modulation
+* Real time parameter modulation (check the CC_update.scd file, you have to DIY)
 * Loading custom DX7 presets
 * Some cosmetic updates.
 
