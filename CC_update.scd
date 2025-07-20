@@ -429,8 +429,22 @@ MIDIdef.cc(\InfernoCC2, {arg ...args;
 	//args[0].postln;
 	vr[args[1] + 128] = args[0];
 	//~novaInferno.set(defme.value(0));
+},(0..127),srcID:~midiInINST4,chan:4);
 
 more info:
 https://github.com/everythingwillbetakenaway/Main-Supercollider-Files/blob/master/Inferno.scd
-//warning old style of DX7 project, its just for you to see how I implemented MIDI CC
+//warning old style of DX7 project, its just for you to see how I implemented MIDI CC, 
+
+last note:
+this sends all the new preset parameters to Cirklon, so it updates, the parameters, it's just the basic MIDI two-way communication, one holds, then updates as needed, one mis-step could cause MIDI feedback
+~midiOutInferno = MIDIOut.newByName("Cirklon", "Port 4");
+
+//this is how you output CC values of each preset to (in this case) midiout, just two in a bracket (highly compact code), little bit reverse engineering is all you need,
+g = r.getLine;
+145.do({arg item;
+	k = (g.at((item*2)) ++ g.at((item*2) + 1)).asInt;
+	~midiOutInferno.control(~cirklonCCparse[item][0],~cirklonCCparse[item][1],k);
+
+});
+
 */
