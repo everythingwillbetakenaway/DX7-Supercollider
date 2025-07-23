@@ -35,6 +35,9 @@
 // Sometimes you see "FAILURE IN SERVER /n_free Node 1202 not found" message. This is not important. It has to do with the note-off implementation (See the DX7.scd end notes for more information). You can ignore this Post Window message. 
 // If you really don't want to see this message, comment out this line (slightly more CPU usage) at DX7.scd  //kilnod = DetectSilence.ar(out, 0.01, 0.2, doneAction:2);
 
+// QUICK REMARK 
+// My SC coding style is purposefully cryptic. I had fun making the code as compact and robust as possible (for example 3 loop functions inside one another), almost like it was a challenge in itself to make it compact. It became a joyful distraction while I was bored with coding in a good way. SuperCollider has a massive library of functions, and I used some old UGens and weird math operators. Don’t look at my code and think SC is difficult. It’s not. It’s actually the best system for DSP coding. If you want to work with hardware, check out FAUST. It has a very similar style, unlike spaghetti-style visual programming languages. 
+
 /*
 //Some fun example below. Uncomment this area and run the below parenthesis for random preset and pitch for each note. Check CPU!!
 (
