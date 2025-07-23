@@ -19,12 +19,15 @@
 
 //STEP 4 - FIRST NOTE
 ( // Note On 80 message with velocity value 100 and preset value 10000
-    ~mainCaller.value(80, 10, 10000);
+    ~mainCaller.value(80, 100, 10000);
 )
 
 ( // Note Off message
 	~mainCaller.value(80, 0);
 )
+
+// LAST STEP 
+// Sometimes you see "FAILURE IN SERVER /n_free Node 1202 not found" message. This is not important. It has to do with the note-off implementation (See the DX7.scd end notes for more information). You can ignore this Post Window message. 
 
 /*
 //Some fun example below. Uncomment this area and run the below parenthesis for random preset and pitch for each note. Check CPU!!
